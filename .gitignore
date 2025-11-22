@@ -1,0 +1,3 @@
+.venv/
+backend/local_settings.py
+backend/__pycache__/
