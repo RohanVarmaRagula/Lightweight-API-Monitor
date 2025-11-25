@@ -34,7 +34,7 @@ class AlertNotification(Base):
         ),
     )
 
-    alert_rule: Mapped["AlertRule"] = relationship(
+    alert_rule: Mapped["AlertRule"] = relationship( #type:ignore
         "AlertRule",
         back_populates="alert_notifications",
     )

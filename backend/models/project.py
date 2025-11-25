@@ -27,23 +27,23 @@ class Project(Base):
         server_default=func.now(),
     )
 
-    user: Mapped["User"] = relationship(
+    user: Mapped["User"] = relationship(#type:ignore
         "User",
         back_populates="projects",
     )
-    api_keys: Mapped[list["APIKey"]] = relationship(
+    api_keys: Mapped[list["APIKey"]] = relationship(#type:ignore
         "APIKey",
         back_populates="project",
     )
-    api_events: Mapped[list["APIEvent"]] = relationship(
+    api_events: Mapped[list["APIEvent"]] = relationship(#type:ignore
         "APIEvent",
         back_populates="project",
     )
-    aggregated_metrics: Mapped[list["AggregatedMetrics"]] = relationship(
+    aggregated_metrics: Mapped[list["AggregatedMetrics"]] = relationship(#type:ignore
         "AggregatedMetrics",
         back_populates="project",
     )
-    alert_rules: Mapped[list["AlertRule"]] = relationship(
+    alert_rules: Mapped[list["AlertRule"]] = relationship(#type:ignore
         "AlertRule",
         back_populates="project",
     )

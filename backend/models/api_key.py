@@ -39,7 +39,7 @@ class APIKey(Base):
         server_default="ACTIVE",
     )
 
-    project: Mapped["Project"] = relationship(
+    project: Mapped["Project"] = relationship(#type:ignore
         "Project",
         back_populates="api_keys",
     )

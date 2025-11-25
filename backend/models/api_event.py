@@ -31,7 +31,7 @@ class APIEvent(Base):
         index=True,
     )
 
-    project: Mapped["Project"] = relationship(
+    project: Mapped["Project"] = relationship(#type:ignore
         "Project",
         back_populates="api_events",
     )

@@ -32,7 +32,7 @@ class AggregatedMetrics(Base):
     p95_latency_ms: Mapped[int | None] = mapped_column(INTEGER)
     p99_latency_ms: Mapped[int | None] = mapped_column(INTEGER)
 
-    project: Mapped["Project"] = relationship(
+    project: Mapped["Project"] = relationship(#type:ignore
         "Project",
         back_populates="aggregated_metrics",
     )

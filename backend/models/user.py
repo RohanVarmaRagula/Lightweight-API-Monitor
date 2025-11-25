@@ -27,4 +27,7 @@ class User(Base):
         "Project",
         back_populates="user"
     ) 
+
+    def __repr__(self):
+        return f"<User(id={self.id!r}, email={self.email!r}, created_at={self.created_at!r})>"
     

@@ -48,11 +48,11 @@ class AlertRule(Base):
         nullable=False,
     )
 
-    project: Mapped["Project"] = relationship(
+    project: Mapped["Project"] = relationship(#type:ignore
         "Project",
         back_populates="alert_rules",
     )
-    alert_notifications: Mapped[list["AlertNotification"]] = relationship(
+    alert_notifications: Mapped[list["AlertNotification"]] = relationship(#type:ignore
         "AlertNotification",
         back_populates="alert_rule",
     )
