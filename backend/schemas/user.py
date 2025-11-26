@@ -1,9 +1,5 @@
 from pydantic import BaseModel, EmailStr, Field
-from enum import Enum
-
-class Status(str, Enum):
-    SUCCESS = "success"
-    FAIL = "fail"
+from schemas.utils import Status
 
 class UserRequest(BaseModel):
     email: EmailStr

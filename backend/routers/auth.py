@@ -1,16 +1,17 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
-from services.user_services import user_exists, add_user, get_user
+from backend.services.user import add_user, get_user
 from database.session import get_session
 from core.hash import verify_password
 from core.jwt import generate_jwt
-from schemas.user import Status, UserRequest, UserResponse, UserLoginResponse
+from schemas.user import UserRequest, UserResponse, UserLoginResponse
+from schemas.utils import Status
 
 auth_router = APIRouter()
 
 @auth_router.post("/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
-def register(user: UserRequest, session: Session = Depends(get_session)) -> UserResponse:
+def register(user: UserRequest, session: Session = Depends(get_session)):
     try:
         add_user(session, user.email, user.password)
     except IntegrityError:

@@ -1,4 +1,4 @@
-from sqlalchemy import select, insert
+from sqlalchemy import select
 from models.user import User
 from sqlalchemy.orm import Session
 from core.hash import get_hash
