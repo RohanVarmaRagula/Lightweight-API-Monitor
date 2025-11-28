@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
-from backend.services.user import add_user, get_user
+from services.user import add_user, get_user
 from database.session import get_session
 from core.hash import verify_password
 from core.jwt import generate_jwt

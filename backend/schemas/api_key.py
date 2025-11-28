@@ -19,4 +19,4 @@ class APIKeyResponse(BaseModel):
     status: APIKeyStatus = APIKeyStatus.ACTIVE
     
     class Config:
-        orm_mode = True
+        from_attributes = True
