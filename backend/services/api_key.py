@@ -19,6 +19,11 @@ def get_api_keys_with_project_id(session: Session, project_id: UUID):
     query = select(APIKey).where(APIKey.project_id == project_id)
     result = session.execute(query).scalars().all()
     return result
+
+def get_project_id_with_api_key(session: Session, api_key: UUID):
+    query = select(APIKey.project_id).where(APIKey.key == api_key)
+    result = session.execute(query).scalar_one_or_none()
+    return result
  
 def modify_api_key_status(session: Session, api_key_id: UUID, new_status: APIKeyStatus) -> bool:
     api_key = session.get(APIKey, api_key_id)
@@ -28,3 +33,10 @@ def modify_api_key_status(session: Session, api_key_id: UUID, new_status: APIKey
     session.commit()
     session.refresh(api_key)
     return True
+
+def check_api_key_status(session: Session, api_key: str) -> APIKeyStatus:
+    query = select(APIKey).where(APIKey.key == api_key)
+    result = session.execute(query).scalar_one_or_none()
+    if result is None:
+        return None
+    return result.status
