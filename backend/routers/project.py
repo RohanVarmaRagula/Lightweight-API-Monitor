@@ -37,7 +37,7 @@ def get_project_by_name(name: str, session: Session = Depends(get_session)):
     return project
 
 @project_router.get("/projects/user/{user_id}", response_model=list[ProjectResponse], status_code=status.HTTP_200_OK)
-def get_project(user_id: UUID, session: Session = Depends(get_session)):
+def get_project_by_user_id(user_id: UUID, session: Session = Depends(get_session)):
     projects = get_projects_with_user_id(session, user_id)
     return projects
 

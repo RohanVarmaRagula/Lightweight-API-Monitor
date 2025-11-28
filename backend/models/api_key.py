@@ -1,18 +1,12 @@
 from __future__ import annotations
 from datetime import datetime
-from enum import Enum as PyEnum
 import uuid
 from sqlalchemy import String, DateTime, ForeignKey, Enum as SAEnum
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
+from schemas.api_key import APIKeyStatus
 from .base import Base
-
-class APIKeyStatus(PyEnum):
-    ACTIVE = "ACTIVE"
-    DISABLED = "DISABLED"
-    EXPIRED = "EXPIRED"
-
 
 class APIKey(Base):
     __tablename__ = "api_keys"
@@ -36,7 +30,7 @@ class APIKey(Base):
     status: Mapped[APIKeyStatus] = mapped_column(
         SAEnum(APIKeyStatus, name="api_key_status"),
         nullable=False,
-        server_default="ACTIVE",
+        server_default=APIKeyStatus.ACTIVE.value,
     )
 
     project: Mapped["Project"] = relationship(#type:ignore
