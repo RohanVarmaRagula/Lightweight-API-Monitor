@@ -1,19 +1,26 @@
+import axios from "axios";
 import { useState } from "react";
+import { API_BASE_URL } from "../config";
+import { useParams } from "react-router-dom";
 
 function SetAPIKey() {
+    const {project_id} = useParams()
     const [clicked, setClicked] = useState(false);
     const [apiKey, setApiKey] = useState(null);
 
     const generateAPIKey = async () => {
         setClicked(true);
-
-        // later you'll do:
-        // const res = await fetch(...)
-        // const data = await res.json();
-        // setApiKey(data.api_key);
-
-        // TEMPORARY fake key:
-        setApiKey("temporary-api-key-12345");
+        try {
+            console.log("project_id from URL:", project_id);
+            const res = await axios.post(`${API_BASE_URL}/api_key`, {
+                "project_id": project_id 
+            })
+            setApiKey(res.data.key);
+        }
+        catch(err) {
+            console.log("API key error:", err.response?.data || err.message);
+            alert(JSON.stringify(err.response?.data || err.message, null, 2));
+        }
     };
 
     return (

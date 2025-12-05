@@ -6,6 +6,7 @@ import SetAPIKey from "./pages/SetAPIKey";
 import ViewAPIKeys from "./pages/ViewAPIKeys";
 import LogIn from "./pages/LoginPage";
 import SignUp from "./pages/SignUp";
+import Home from "./pages/Home";
 
 function App() {
   return (
@@ -13,12 +14,14 @@ function App() {
       <Routes>
 
         <Route path="/" element={<AppLayout/>}>
+          <Route path="/Home" element={<Home/>}/>
           <Route path="/login" element={<LogIn/>}/>
           <Route path="/signup" element={<SignUp/>}/>
           <Route path="/projects" element={<ProjectsPage/>}/>
           <Route path="/projects/new-project" element={<NewProjectPage/>}/>
-          <Route path="/projects/:project-id/set-api-key" element={<SetAPIKey/>}/>
-          <Route path="/api-keys" element={<ViewAPIKeys/>}/>
+          <Route path="/projects/:project_id/set-api-key" element={<SetAPIKey/>}/>
+          <Route path="/projects/:id/project-api-keys" element={<ViewAPIKeys basedOn={"project_id"}/>}/>
+          <Route path="/:id/user-api-keys" element={<ViewAPIKeys basedOn={"user_id"}/>}/>
         </Route>
 
       </Routes>

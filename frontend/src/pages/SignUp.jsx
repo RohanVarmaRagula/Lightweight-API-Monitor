@@ -24,7 +24,7 @@ function SignUp() {
       });
       localStorage.setItem("email", email)
       console.log("Signup success:", res.data);
-      navigate("../projects"); 
+      navigate("../login"); 
     } catch (err) {
       console.log("Signup error:", err.response?.data || err.message);
       alert(err.response?.data?.detail || "Signup failed");

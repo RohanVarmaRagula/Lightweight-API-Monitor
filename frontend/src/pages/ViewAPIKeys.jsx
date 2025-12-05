@@ -1,4 +1,28 @@
-function ViewAPIKeys() {
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { API_BASE_URL } from "../config";
+import { useEffect, useState } from "react";
+
+function ViewAPIKeys({basedOn}) {
+    const {id} = useParams()
+    const [keys, setKeys] = useState([])
+
+    useEffect(() => {
+        const getAPIKeys = async() => { 
+            try {
+                const URL = (basedOn == "user_id") ?
+                            `${API_BASE_URL}/api_key/user/${id}` :
+                            `${API_BASE_URL}/api_key/project/${id}`;
+                const res = await axios.get(URL);
+                console.log(res.data)
+                setKeys(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        getAPIKeys();
+    }, [id, basedOn])
+
     return (
         <table className="api-keys-table">
             <thead className="ak-head">
@@ -10,42 +34,15 @@ function ViewAPIKeys() {
             </thead>
 
             <tbody className="ak-body">
-
-                <tr className="ak-row">
-                    <td className="ak-cell ak-cell-key">sk_live_9f23b1c8a4ef12cd</td>
-                    <td className="ak-cell ak-cell-project">User Service</td>
-                    <td className="ak-cell ak-cell-date">2025-01-21</td>
-                </tr>
-
-                <tr className="ak-row">
-                    <td className="ak-cell ak-cell-key">sk_live_72ffaa19d31e092b</td>
-                    <td className="ak-cell ak-cell-project">Payments API</td>
-                    <td className="ak-cell ak-cell-date">2025-01-18</td>
-                </tr>
-
-                <tr className="ak-row">
-                    <td className="ak-cell ak-cell-key">sk_live_5e91e7cd0bb29e01</td>
-                    <td className="ak-cell ak-cell-project">Notifications Service</td>
-                    <td className="ak-cell ak-cell-date">2025-01-11</td>
-                </tr>
-
-                <tr className="ak-row">
-                    <td className="ak-cell ak-cell-key">sk_live_f1ceb2a9c0de7aa3</td>
-                    <td className="ak-cell ak-cell-project">Analytics Engine</td>
-                    <td className="ak-cell ak-cell-date">2025-01-09</td>
-                </tr>
-
-                <tr className="ak-row">
-                    <td className="ak-cell ak-cell-key">sk_live_baa7f41fc2a3e917</td>
-                    <td className="ak-cell ak-cell-project">Search Service</td>
-                    <td className="ak-cell ak-cell-date">2025-01-06</td>
-                </tr>
-
-                <tr className="ak-row">
-                    <td className="ak-cell ak-cell-key">sk_live_0c2e19b84f77d13e</td>
-                    <td className="ak-cell ak-cell-project">File Storage API</td>
-                    <td className="ak-cell ak-cell-date">2025-01-03</td>
-                </tr>
+                {keys.map((item, idx) => (
+                    <tr key={idx} className="ak-row">
+                        <td className="ak-cell ak-cell-key">{item.api_key}</td>
+                        <td className="ak-cell ak-cell-project">{item.project_name}</td>
+                        <td className="ak-cell ak-cell-date">{
+                        new Date(item.created_at).toLocaleDateString()}
+                        </td>
+                    </tr>
+                ))}
 
             </tbody>
         </table>

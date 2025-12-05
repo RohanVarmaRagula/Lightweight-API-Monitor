@@ -27,4 +27,4 @@ def login(user: UserRequest, session: Session = Depends(get_session)) -> UserLog
     if not verify_password(user.password, retrieved_user.password_hash):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Password incorrect.")
     token = generate_jwt(payload={"email": retrieved_user.email})
-    return UserLoginResponse(access_token=token, token_type="bearer")
+    return UserLoginResponse(user_id=retrieved_user.id, access_token=token, token_type="bearer")

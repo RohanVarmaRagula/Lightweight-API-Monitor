@@ -6,11 +6,12 @@ import { useState } from "react";
 function AppLayout() {
     const [openProfile, setOpenProfile] = useState(false);
     const navigate = useNavigate();
+    const user_id = localStorage.getItem("user_id")
     const goToProjects = () => {
         navigate("/projects");
     }
     const goToAPIKeys = () => {
-        navigate("/api-keys")
+        navigate(`/${user_id}/user-api-keys`)
     }
 
     return (

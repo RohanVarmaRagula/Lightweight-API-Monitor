@@ -16,14 +16,21 @@ function Profile({onClose}) {
     }, [])
 
     const logout = () => {
-        localStorage.removeItem("token");
-        navigate("/");
+        localStorage.clear()
+        onClose()
+        navigate("/home");
     };
+    const goToLogIn = () => {
+        navigate("../login");
+    }
+    
+    const logOutButton = (<button className="pm-item logout" onClick={logout}>Log out</button>);
+    const logInButton = (<button className="pm-item login" onClick={goToLogIn}>Log in</button>);
+    const isLoggedIn = !!localStorage.getItem("token")
     return (
         <div ref={profileRef} className="profile-menu">
             <p className="pm-email">{localStorage.email}</p>
-            <button className="pm-item logout"
-                onClick={logout}>Log out</button>
+            {isLoggedIn ? logOutButton : logInButton}
         </div>
     )
 }

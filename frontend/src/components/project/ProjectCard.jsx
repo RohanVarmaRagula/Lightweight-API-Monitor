@@ -1,12 +1,15 @@
+import { useNavigate } from "react-router-dom";
+
 function ProjectCard({
     name, 
+    id,
     description,
     health,
     n_requests_24h,
     error_rate
 }) {
     const statusClass = health == "Healthy" ? "status-dot status-healthy" : "status-dot status-degraded";
-
+    const navigate = useNavigate()
     return (
         <div className="project-card">
             <div className="project-card-header">
@@ -34,7 +37,7 @@ function ProjectCard({
             
             <div className="project-card-footer">
                 <button className="btn-secondary">View Dashboard</button>
-                <button className="btn-ghost">API Keys ▸</button>
+                <button className="btn-ghost" onClick={()=>navigate(`${id}/project-api-keys`)}>API Keys ▸</button>
             </div>
         </div>
     )

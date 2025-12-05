@@ -1,5 +1,7 @@
+import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../config";
 
 function NewProjectPage() {
     const [name, setName] = useState("");
@@ -7,14 +9,20 @@ function NewProjectPage() {
 
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        try {
+            const res = await axios.post(`${API_BASE_URL}/projects`, {
+                "name": name,
+                "description": description,
+                "user_id": localStorage.getItem("user_id")
+            })
+            navigate(`../projects/${res.data.id}/set-api-key`)
 
-        // habdle API calls here 
-        // data = api call for project details to get id
-
-        // navigate("/projects/${data.id}/set-api-key")
-        navigate("../projects/1/set-api-key")
+        } catch(err) {
+            console.log("Can't create new project:", err.response?.data || err.message);
+            alert(err.response?.data?.detail || "Create Project failed.");
+        }
     };
 
     return (

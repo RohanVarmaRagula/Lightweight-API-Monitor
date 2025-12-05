@@ -2,7 +2,7 @@ from __future__ import annotations
 from datetime import datetime
 import uuid
 from sqlalchemy import String, DateTime, ForeignKey, Enum as SAEnum
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.dialects.postgresql import UUID as P_UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
 from schemas.api_key import APIKeyStatus
@@ -12,12 +12,12 @@ class APIKey(Base):
     __tablename__ = "api_keys"
 
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        P_UUID(as_uuid=True),
         primary_key=True,
         default=uuid.uuid4,
     )
     project_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        P_UUID(as_uuid=True),
         ForeignKey("projects.id"),
         nullable=False,
     )

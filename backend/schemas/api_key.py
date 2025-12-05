@@ -20,3 +20,8 @@ class APIKeyResponse(BaseModel):
     
     class Config:
         from_attributes = True
+        
+class APIKeyResponseFromID(BaseModel):
+    api_key: str
+    project_name: str
+    created_at: datetime
