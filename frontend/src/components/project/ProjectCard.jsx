@@ -36,7 +36,7 @@ function ProjectCard({
             </div>
             
             <div className="project-card-footer">
-                <button className="btn-secondary">View Dashboard</button>
+                <button className="btn-secondary" onClick={() => navigate(`${id}/dashboard`)}>View Dashboard</button>
                 <button className="btn-ghost" onClick={()=>navigate(`${id}/project-api-keys`)}>API Keys ▸</button>
             </div>
         </div>
