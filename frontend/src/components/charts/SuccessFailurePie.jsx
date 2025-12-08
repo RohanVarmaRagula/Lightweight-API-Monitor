@@ -3,19 +3,18 @@ import {PieChart} from '@mui/x-charts/PieChart'
 
 function SuccessFailurePie() {
     const data = [
-        { id: 0, value: 3215, label: "success", color: "#26a69a"},   
+        { id: 0, value: 3215, label: "success", color: "#1e9275ff"},   
         { id: 1, value: 478,  label: "failure", color: "#ff9800"},   
     ];
 
     return (
-        <Card sx={{width:320, height:350}}>
+        <Card sx={{width:"100%"}}>
             <CardHeader
                 title='API STATUS'
                 subheader='Success vs Failure of API calls'
             />
             <CardContent sx={{display:'flex', justifyContent: 'center'}}>
                 <PieChart 
-                    height={200}
                     series={[
                         {
                             data,
