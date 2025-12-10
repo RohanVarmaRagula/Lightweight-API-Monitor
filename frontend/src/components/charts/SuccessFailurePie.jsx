@@ -1,10 +1,10 @@
 import { Card, CardContent, CardHeader } from '@mui/material';
 import {PieChart} from '@mui/x-charts/PieChart'
 
-function SuccessFailurePie() {
+function SuccessFailurePie({success, fail}) {
     const data = [
-        { id: 0, value: 3215, label: "success", color: "#1e9275ff"},   
-        { id: 1, value: 478,  label: "failure", color: "#ff9800"},   
+        { id: 0, value: success, label: "success", color: "#1e9275ff"},   
+        { id: 1, value: fail,  label: "failure", color: "#ff9800"},   
     ];
 
     return (

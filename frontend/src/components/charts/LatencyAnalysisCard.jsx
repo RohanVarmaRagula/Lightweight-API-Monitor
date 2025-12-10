@@ -1,10 +1,10 @@
 import { Card, CardContent, CardHeader } from "@mui/material";
 import { BarChart } from "@mui/x-charts/BarChart";
 
-function LatencyAnalysisCard() {
-  const p95 = 420.0;
-  const p99 = 470.4;
-  const avg = 300.21;
+function LatencyAnalysisCard({p95_latency, p99_latency, avg_latency}) {
+  const p95 = p95_latency;
+  const p99 = p99_latency;
+  const avg = avg_latency;
 
   return (
     <Card sx={{ width: "100%" }}>

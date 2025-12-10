@@ -1,18 +1,6 @@
 import {Card, CardContent, CardHeader, Chip, Typography} from '@mui/material'
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 
-function ErrorRateCard() {
-    const {project_id} = useParams()
-    const [errorRateValue, setErrorRateValue] = useState(0)
-    useEffect(()=>{
-        const getErrorRate = async() => {
-            const res = 2.67 // frm api 
-            setErrorRateValue(res)
-        }
-        getErrorRate();
-    }
-    ,[project_id])
+function ErrorRateCard({errorRateValue}) {
     const healthComment = 
         errorRateValue < 10 ? 'Healthy' :
         errorRateValue < 50 ? 'Warning' :

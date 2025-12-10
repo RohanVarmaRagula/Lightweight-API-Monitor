@@ -3,16 +3,27 @@ from datetime import datetime, timedelta
 from models.api_event import APIEvent
 from models.aggregated_metrics import AggregatedMetrics
 from sqlalchemy.orm import Session
-from sqlalchemy import select, and_
+from sqlalchemy import select, and_, desc
 from services.utils import _percentile_index
 
-def get_hourly_data_from_project_id(session: Session, project_id: UUID):
-    query = select(AggregatedMetrics).where(AggregatedMetrics.project_id == project_id)
+
+def get_hourly_data_from_project_id(session: Session, project_id: UUID, limit: int=24):
+    one_day_ago = datetime.now() - timedelta(days=1)
+    query = select(AggregatedMetrics).where(
+        and_(
+            AggregatedMetrics.hour_bucket>=one_day_ago,
+            AggregatedMetrics.project_id==project_id
+        )).order_by(desc(AggregatedMetrics.hour_bucket)).limit(limit)
     results = session.execute(query).scalars().all()
     return results
 
-def get_data_from_project_id(session: Session, project_id: UUID):
-    query = select(APIEvent).where(APIEvent.project_id == project_id)
+def get_data_from_project_id(session: Session, project_id: UUID, limit: int=100):
+    one_day_ago = datetime.now() - timedelta(days=1)
+    query = select(APIEvent).where(
+        and_(
+            APIEvent.timestamp>=one_day_ago,
+            APIEvent.project_id==project_id
+        )).order_by(desc(APIEvent.timestamp)).limit(limit)
     results = session.execute(query).scalars().all()
     return results
 
