@@ -5,7 +5,7 @@ from database.session import get_session
 from schemas.ingest import IngestRequest, IngestResponse
 from schemas.api_key import APIKeyStatus
 from services.api_key import check_api_key_status, get_project_id_with_api_key
-from services.ingest import add_event
+from services.ingest import add_event, update_aggregated_metrics
 
 ingest_router = APIRouter()
 
@@ -33,6 +33,13 @@ def ingest_data(ingest_req: IngestRequest, session: Session = Depends(get_sessio
             latency_ms=ingest_req.latency_ms,
             error=ingest_req.error
         )
+        update_aggregated_metrics(
+            session=session,
+            project_id=project_id,
+            endpoint=ingest_req.endpoint,
+            method=ingest_req.method
+        )
+        
     except IntegrityError:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
