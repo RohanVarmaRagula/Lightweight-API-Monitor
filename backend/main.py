@@ -5,6 +5,7 @@ from routers.project import project_router
 from routers.api_key import api_key_router
 from routers.ingest import ingest_router
 from routers.api_event import api_event_router
+from routers.metrics import metrics_router
 
 app = FastAPI()
 
@@ -30,3 +31,4 @@ app.include_router(project_router)
 app.include_router(api_key_router)
 app.include_router(ingest_router)
 app.include_router(api_event_router)
+app.include_router(metrics_router)

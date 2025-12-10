@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import select, and_
 from models.api_event import APIEvent
 from models.aggregated_metrics import AggregatedMetrics
+from services.utils import _percentile_index
 
 def add_event(
     session: Session, 
@@ -61,15 +62,6 @@ def get_events_for_hour(
         .order_by(APIEvent.timestamp)
     )
     return session.execute(query).all()
-
-
-def _percentile_index(n: int, p: float) -> int:
-    if n <= 0:
-        return 0
-    res = int(n * p) - 1
-    res = max(res, 0)
-    res = min(res, n - 1)
-    return res    
 
 
 def update_aggregated_metrics(
