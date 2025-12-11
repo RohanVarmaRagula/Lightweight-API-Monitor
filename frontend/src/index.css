@@ -1,34 +1,31 @@
-/* =========================
-   Deep Navy SaaS Theme (No Glow)
-   ========================= */
-
 :root {
-  /* Surfaces */
-  --bg: #020617;
-  --surface-1: #020617;
-  --surface-2: #02081f;
-  --surface-3: #020b2a;
+  /* Surfaces - Changed to Light/Off-White */
+  --bg: #f9fafb; /* Very light gray/off-white */
+  --surface-1: #ffffff; /* Pure white for main surface */
+  --surface-2: #f3f4f6; /* Subtle light gray for card backgrounds */
+  --surface-3: #e5e7eb; /* Slightly darker light gray for inputs/hover */
 
-  /* Borders */
-  --border-subtle: #1f2937;
-  --border-strong: #334155;
-  --border-accent: #38bdf8;
+  /* Borders - Changed to Light */
+  --border-subtle: #d1d5db; /* Light gray border */
+  --border-strong: #9ca3af; /* Medium gray border */
+  --border-accent: #38bdf8; /* Accent color remains */
 
-  /* Text */
-  --text-primary: #f9fafb;
-  --text-secondary: #cbd5f5;
-  --text-muted: #6b7280;
+  /* Text - Changed to Dark */
+  --text-primary: #1f2937; /* Dark gray for primary text */
+  --text-secondary: #4b5563; /* Medium gray for secondary text */
+  --text-muted: #6b7280; /* Muted gray (less change) */
 
-  /* Accent (indigo / cyan mix) */
+  /* Accent (indigo / cyan mix) - No Change (keeps the pop) */
   --accent: #38bdf8;
-  --accent-soft: rgba(56, 189, 248, 0.16);
+  --accent-soft: rgba(56, 189, 248, 0.2); /* Softened accent */
   --accent-strong: #0ea5e9;
 
-  /* Radius & shadows */
+  /* Radius & shadows - Adjusted shadow to be lighter/less opaque */
   --radius-lg: 18px;
   --radius-pill: 999px;
-  --shadow-md: 0 18px 40px rgba(15, 23, 42, 0.6);
-  --shadow-soft: 0 12px 30px rgba(15, 23, 42, 0.45);
+  /* Lighter shadows for light background */
+  --shadow-md: 0 18px 40px rgba(0, 0, 0, 0.08);
+  --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.05);
 }
 
 /* ===== Global ===== */
@@ -49,90 +46,9 @@ body {
   min-height: 100vh;
 }
 
-.page-container {
-  max-width: 1400px;
-  margin: 24px auto 40px;
-  padding: 0 32px;
-}
 
-/* ===== Top Bar (AppLayout) ===== */
 
-.app-layout {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 40px;
 
-  background: rgba(2, 6, 23, 0.95);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border-subtle);
-
-  position: sticky;
-  top: 0;
-  z-index: 999;
-}
-
-.app-layout h2 {
-  margin: 0;
-  font-size: 19px;
-  font-weight: 600;
-  letter-spacing: -0.3px;
-  color: var(--text-primary);
-}
-
-/* nav buttons */
-
-.app-layout button {
-  margin: 0 10px;
-  padding: 10px 22px;
-  border: 1px solid transparent;
-  border-radius: var(--radius-pill);
-  background-color: transparent;
-
-  font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
-  color: var(--text-secondary);
-
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease,
-    border-color 0.2s ease,
-    transform 0.15s ease;
-}
-
-.app-layout button:hover {
-  background-color: var(--surface-3);
-  border-color: var(--border-strong);
-  color: var(--text-primary);
-}
-
-.app-layout button:active {
-  transform: scale(0.96);
-}
-
-/* profile avatar */
-
-.app-layout img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  margin-left: 28px;
-
-  border: 2px solid var(--border-strong);
-  object-fit: cover;
-  background: var(--surface-3);
-  
-  transition: 
-    transform 0.2s ease, 
-    border-color 0.2s ease;
-}
-
-.app-layout img:hover {
-  transform: scale(1.05);
-  border-color: var(--accent);
-}
 /* ===== New Project Card (button styled like project cards) ===== */
 
 .new-project-bar {
@@ -140,7 +56,7 @@ body {
   appearance: none;
   -webkit-appearance: none;
   border: 1px solid var(--border-subtle);
-  background: var(--surface-2);
+  background: var(--surface-2); /* Light surface */
   color: inherit;
   font: inherit;
   outline: none;
@@ -172,7 +88,7 @@ body {
   transform: translateY(-4px);
   box-shadow: var(--shadow-md);
   border-color: var(--accent-strong);
-  background: var(--surface-3);
+  background: var(--surface-3); /* Light hover surface */
 }
 
 /* keyboard focus state */
@@ -182,7 +98,7 @@ body {
   box-shadow:
     0 0 0 1px var(--accent-strong),
     var(--shadow-md);
-  background: var(--surface-3);
+  background: var(--surface-3); /* Light focus surface */
 }
 
 /* Simple icon */
@@ -217,7 +133,7 @@ body {
   margin: 0;
   font-size: 20px;
   font-weight: 600;
-  color: #e5edff;
+  color: var(--text-primary); /* Dark text */
   grid-row: 1;
   grid-column: 2;
   align-self: end;
@@ -260,7 +176,7 @@ body {
 }
 
 .project-card {
-  background: var(--surface-2);
+  background: var(--surface-2); /* Light surface */
   border-radius: 24px;
   padding: 22px 26px;
   border: 1px solid var(--border-subtle);
@@ -281,7 +197,7 @@ body {
   transform: translateY(-4px);
   box-shadow: var(--shadow-md);
   border-color: var(--accent-strong);
-  background: var(--surface-3);
+  background: var(--surface-3); /* Light hover surface */
 }
 
 /* Header: title + description + health */
@@ -296,7 +212,7 @@ body {
   margin: 0;
   font-size: 20px;
   font-weight: 600;
-  color: #e5edff;
+  color: var(--text-primary); /* Dark text */
 }
 
 .project-description {
@@ -310,7 +226,7 @@ body {
   align-items: center;
   gap: 8px;
   font-size: 14px;
-  color: var(--text-secondary);
+  color: var(--text-secondary); /* Darker secondary text */
 }
 
 .status-dot {
@@ -350,7 +266,7 @@ body {
   margin: 3px 0 0;
   font-size: 24px;
   font-weight: 500;
-  color: var(--text-primary);
+  color: var(--text-primary); /* Dark text */
 }
 
 /* Footer buttons */
@@ -361,16 +277,17 @@ body {
   margin-top: 10px;
 }
 
-/* primary button */
+/* primary button (now secondary in light theme) */
 
 .btn-secondary {
   padding: 8px 18px;
   border-radius: var(--radius-pill);
-  border: 1px solid rgba(148, 163, 184, 0.6);
-  background: linear-gradient(135deg, #020b2a, #031525);
+  /* Adjust border color and background for light theme */
+  border: 1px solid var(--border-strong);
+  background: var(--surface-1); /* White background for button */
   font-size: 14px;
   cursor: pointer;
-  color: var(--text-primary);
+  color: var(--text-primary); /* Dark text */
 
   transition:
     background 0.18s ease,
@@ -380,9 +297,9 @@ body {
 }
 
 .btn-secondary:hover {
-  background: linear-gradient(135deg, #0b1120, #0f172a);
+  background: var(--surface-3); /* Slight hover background */
   border-color: var(--accent-strong);
-  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.6);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08); /* Lighter shadow */
 }
 
 .btn-secondary:active {
@@ -398,7 +315,7 @@ body {
   background-color: transparent;
   font-size: 14px;
   cursor: pointer;
-  color: var(--text-secondary);
+  color: var(--text-secondary); /* Dark secondary text */
 
   transition:
     background-color 0.15s ease,
@@ -408,9 +325,9 @@ body {
 }
 
 .btn-ghost:hover {
-  background-color: rgba(15, 23, 42, 0.9);
-  border-color: var(--border-subtle);
-  color: var(--text-primary);
+  background-color: var(--surface-3); /* Light hover background */
+  border-color: var(--border-strong);
+  color: var(--text-primary); /* Dark text on hover */
 }
 
 .btn-ghost:active {
@@ -418,7 +335,7 @@ body {
 }
 
 /* ===============================
-   New Project Form (Deep Navy UI)
+   New Project Form (Light UI)
    =============================== */
 
 .new-project-form {
@@ -447,7 +364,7 @@ body {
 .form-group label {
   font-size: 15px;
   font-weight: 500;
-  color: var(--text-secondary);
+  color: var(--text-secondary); /* Dark secondary text */
 }
 
 /* Inputs + textarea shared styling */
@@ -457,8 +374,8 @@ body {
   padding: 12px 16px;
 
   font-size: 15px;
-  color: var(--text-primary);
-  background: var(--surface-3);
+  color: var(--text-primary); /* Dark text */
+  background: var(--surface-1); /* White input background */
 
   border-radius: 14px;
   border: 1px solid var(--border-subtle);
@@ -481,20 +398,21 @@ body {
 .new-project-form input:focus,
 .new-project-form textarea:focus {
   border-color: var(--accent-strong);
-  background: #031024;
+  background: var(--surface-1); /* Keep background consistent */
   box-shadow: 0 0 0 1px var(--accent-strong), var(--shadow-soft);
 }
 
-/* Submit button (same design as your secondary button) */
+/* Submit button (Primary Button) */
 .new-project-form .btn-primary {
   padding: 12px 24px;
   font-size: 15px;
   font-weight: 500;
 
-  background: linear-gradient(135deg, #020b2a, #031525);
-  border: 1px solid rgba(148, 163, 184, 0.6);
+  /* Use solid accent background for primary action */
+  background: var(--accent);
+  border: 1px solid var(--accent);
   border-radius: var(--radius-pill);
-  color: var(--text-primary);
+  color: var(--surface-1); /* White text on accent */
   cursor: pointer;
 
   transition:
@@ -506,9 +424,9 @@ body {
 
 /* Hover */
 .new-project-form .btn-primary:hover {
-  background: linear-gradient(135deg, #0b1120, #0f172a);
+  background: var(--accent-strong);
   border-color: var(--accent-strong);
-  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.6);
+  box-shadow: 0 10px 26px rgba(56, 189, 248, 0.4); /* Accent colored shadow */
 }
 
 /* Active */
@@ -535,7 +453,7 @@ body {
 /* Table head */
 
 .ak-head {
-  background: var(--surface-3);
+  background: var(--surface-3); /* Light header background */
 }
 
 .ak-head-row {
@@ -549,7 +467,7 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--text-muted);
+  color: var(--text-secondary); /* Darker muted text */
   border-bottom: 1px solid var(--border-strong);
 }
 
@@ -582,12 +500,12 @@ body {
 
 /* subtle zebra striping */
 .ak-row:nth-child(even) {
-  background: #02081f;
+  background: var(--surface-1); /* White for subtle contrast */
 }
 
 /* hover interaction to match card vibes */
 .ak-row:hover {
-  background: #020b2a;
+  background: var(--surface-3); /* Light hover background */
 }
 
 /* Table cells */
@@ -600,7 +518,7 @@ body {
 
 /* last row: remove heavy border feel */
 .ak-row:last-child .ak-cell {
-  border-bottom-color: rgba(31, 41, 55, 0.6);
+  border-bottom-color: rgba(209, 213, 219, 0.6); /* Lighter border color */
 }
 
 /* API key: monospace, ellipsis, accent hint */
@@ -610,7 +528,7 @@ body {
     "Liberation Mono", "Courier New", monospace;
   font-size: 13px;
   letter-spacing: 0.03em;
-  color: #e5edff;
+  color: var(--text-primary); /* Darker key text */
 
   white-space: nowrap;
   overflow: hidden;
@@ -644,14 +562,15 @@ body {
   justify-content: center;
 
   padding: 40px 16px;
-  background: radial-gradient(circle at top, #020b2a 0, #020617 48%, #000 100%);
+  /* Light radial gradient */
+  background: radial-gradient(circle at top, #e5e7eb 0, #f9fafb 48%, #fff 100%);
 }
 
 .auth-card {
   width: 100%;
   max-width: 420px;
 
-  background: var(--surface-2);
+  background: var(--surface-1); /* Pure white surface */
   border-radius: 24px;
   border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-soft);
@@ -665,7 +584,7 @@ body {
   font-size: 24px;
   font-weight: 600;
   letter-spacing: -0.02em;
-  color: #e5edff;
+  color: var(--text-primary); /* Dark title */
 }
 
 .auth-subtitle {
@@ -690,7 +609,7 @@ body {
 
   font-size: 14px;
   color: var(--text-primary);
-  background: var(--surface-3);
+  background: var(--surface-2); /* Light input background */
 
   border-radius: 14px;
   border: 1px solid var(--border-subtle);
@@ -708,7 +627,7 @@ body {
 
 .auth-input:focus {
   border-color: var(--accent-strong);
-  background: #031024;
+  background: var(--surface-2); /* Keep consistent */
   box-shadow: 0 0 0 1px var(--accent-strong), var(--shadow-soft);
 }
 
@@ -721,17 +640,18 @@ body {
   align-items: center;
 }
 
-/* Global btn-primary (to reuse outside forms as well) */
+/* Global btn-primary */
 
 .btn-primary {
   padding: 11px 22px;
   font-size: 14px;
   font-weight: 500;
 
-  background: linear-gradient(135deg, #020b2a, #031525);
-  border: 1px solid rgba(148, 163, 184, 0.6);
+  /* Accent background for primary button */
+  background: var(--accent);
+  border: 1px solid var(--accent);
   border-radius: var(--radius-pill);
-  color: var(--text-primary);
+  color: var(--surface-1); /* White text */
   cursor: pointer;
 
   transition:
@@ -742,9 +662,9 @@ body {
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #0b1120, #0f172a);
+  background: var(--accent-strong);
   border-color: var(--accent-strong);
-  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.6);
+  box-shadow: 0 10px 26px rgba(56, 189, 248, 0.4);
 }
 
 .btn-primary:active {
@@ -759,6 +679,7 @@ body {
 
 .auth-switch {
   font-size: 13px;
+  color: var(--text-secondary);
 }
 
 /* =======================
@@ -771,13 +692,14 @@ body {
   right: 32px;
 
   min-width: 240px;
+  /* Light radial gradient + surface */
   background: radial-gradient(circle at top left,
               rgba(56, 189, 248, 0.12),
               transparent 55%)
-              , var(--surface-2);
+              , var(--surface-1); /* White surface */
   border-radius: 22px;
-  border: 1px solid rgba(148, 163, 184, 0.45);
-  box-shadow: 0 22px 40px rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-strong); /* Darker border for definition */
+  box-shadow: 0 22px 40px rgba(0, 0, 0, 0.15); /* Lighter shadow */
 
   padding: 10px 0;
   z-index: 9999;
@@ -801,79 +723,17 @@ body {
   }
 }
 
-/* Top email display */
-.pm-email {
-  padding: 12px 18px 11px;
-  font-size: 13px;
-  color: var(--text-secondary);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.3);
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Menu items (generic) */
-.pm-item {
-  width: 100%;
-  padding: 10px 18px;
-  background: transparent;
-  border: none;
-  text-align: left;
-
-  font-size: 14px;
-  cursor: pointer;
-  color: var(--text-secondary);
-
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  transition:
-    background 0.16s ease,
-    color 0.16s ease,
-    transform 0.08s ease;
-}
-
-.pm-item:hover {
-  background: rgba(15, 23, 42, 0.92);
-  color: var(--text-primary);
-  transform: translateY(-1px);
-}
-
-/* Logout styling */
-.pm-item.logout {
-  margin-top: 6px;
-  border-top: 1px solid rgba(148, 163, 184, 0.2);
-
-  padding: 10px 18px;
-  color: #f87171;
-
-  background: transparent;
-  text-align: left;
-
-  border-radius: 0;
-}
-.pm-item.logout:hover {
-  background: rgba(255, 87, 87, 0.08);
-  color: #ffaaaa;
-}
 /* Ensure the avatar wrapper is positioned relative */
 .profile-container,
 .profile-wrapper {
   position: relative;
 }
 
-
-/* Responsive adjustments */
+/* Responsive adjustments - mostly unchanged, but colors are inherited */
 @media (max-width: 768px) {
-  .page-container,
+  
   .cards-grid {
     padding: 20px;
-  }
-
-  .app-layout {
-    padding: 12px 20px;
   }
 
   .cards-grid {
@@ -900,7 +760,6 @@ body {
   .new-project-bar .np-sub {
     font-size: 13px;
   }
-
   
   .new-project-form {
     padding: 24px 26px;

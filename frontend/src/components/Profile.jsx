@@ -1,38 +1,83 @@
-import { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Paper, Typography, MenuList, MenuItem, ListItemIcon, ListItemText, Divider, ClickAwayListener} from "@mui/material";
+import LogoutIcon from "@mui/icons-material/Logout";
+import LoginIcon from "@mui/icons-material/Login";
 
-function Profile({onClose}) {
-    const navigate = useNavigate();
-    const profileRef = useRef(null);
+function Profile({ onClose }) {
+  const navigate = useNavigate();
+  const isLoggedIn = !!localStorage.getItem("token");
+  const email = localStorage.getItem("email") ?? "";
 
-    useEffect(() => {
-        function handleClick(e) {
-            if (profileRef.current && !profileRef.current.contains(e.target)) {
-                onClose();
-            }
-        }
-        document.addEventListener("mousedown", handleClick);
-        return () => document.removeEventListener("mousedown", handleClick)
-    }, [])
+  const logout = () => {
+    localStorage.clear();
+    onClose();
+    navigate("/");
+  };
 
-    const logout = () => {
-        localStorage.clear()
-        onClose()
-        navigate("/home");
-    };
-    const goToLogIn = () => {
-        navigate("../login");
-    }
-    
-    const logOutButton = (<button className="pm-item logout" onClick={logout}>Log out</button>);
-    const logInButton = (<button className="pm-item login" onClick={goToLogIn}>Log in</button>);
-    const isLoggedIn = !!localStorage.getItem("token")
-    return (
-        <div ref={profileRef} className="profile-menu">
-            <p className="pm-email">{localStorage.email}</p>
-            {isLoggedIn ? logOutButton : logInButton}
-        </div>
-    )
+  const goToLogIn = () => {
+    onClose();
+    navigate("../login");
+  };
+
+  return (
+    <ClickAwayListener onClickAway={onClose}>
+      <Paper elevation={8} role="menu" sx={{
+            position: "absolute",    
+            top: 70,
+            right: 32,
+            minWidth: 240,
+            borderRadius: 2.75,      
+            border: "1px solid",
+            borderColor: "grey.300",
+            zIndex: 1400,
+            overflow: "hidden",
+            background: (theme) =>
+                `radial-gradient(circle at top left, rgba(56,189,248,0.08), transparent 55%), ${theme.palette.background.paper}`,
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+            boxShadow: "0 22px 40px rgba(0,0,0,0.12)",
+        }}>
+        <Paper component="div" square elevation={0} sx={{
+            px: 2,
+            py: 1,
+            borderBottom: "1px solid",
+            borderColor: "grey.200",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            background: "transparent",
+            }}>
+            <Typography variant="body2">
+                {email || "Not signed in"}
+            </Typography>
+        </Paper>
+
+        <MenuList dense>
+          {isLoggedIn ? (
+            <MenuItem onClick={logout} sx={{ gap: 1 }}>
+              <ListItemIcon>
+                <LogoutIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText>
+                <Typography variant="body2">Log out</Typography>
+              </ListItemText>
+            </MenuItem>
+          ) : (
+            <MenuItem onClick={goToLogIn} sx={{ gap: 1 }}>
+              <ListItemIcon>
+                <LoginIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText>
+                <Typography variant="body2">Log in</Typography>
+              </ListItemText>
+            </MenuItem>
+          )}
+
+          <Divider sx={{ my: 0.5 }} />
+        </MenuList>
+      </Paper>
+    </ClickAwayListener>
+  );
 }
 
 export default Profile;

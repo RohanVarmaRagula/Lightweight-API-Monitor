@@ -17,7 +17,7 @@ function LogIn() {
             localStorage.setItem("email", email)
             localStorage.setItem("user_id", res.data.user_id)
             localStorage.setItem("token", res.data.access_token)
-            navigate("../home")
+            navigate("../")
         } catch (err){
             console.log("Login error:", err.response?.data || err.message);
             alert(err.response?.data?.detail || "Login failed");
