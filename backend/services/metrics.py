@@ -15,6 +15,7 @@ def get_hourly_data_from_project_id(session: Session, project_id: UUID, limit: i
             AggregatedMetrics.project_id==project_id
         )).order_by(desc(AggregatedMetrics.hour_bucket)).limit(limit)
     results = session.execute(query).scalars().all()
+    print("results: ", results)
     return results
 
 def get_data_from_project_id(session: Session, project_id: UUID, limit: int=100):

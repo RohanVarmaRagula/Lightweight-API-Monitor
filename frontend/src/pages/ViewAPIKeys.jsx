@@ -1,11 +1,13 @@
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { API_BASE_URL } from "../config";
 import { useEffect, useState } from "react";
+import { Box, Button } from "@mui/material";
 
 function ViewAPIKeys({basedOn}) {
     const {id} = useParams()
     const [keys, setKeys] = useState([])
+    const navigate = useNavigate()
 
     useEffect(() => {
         const getAPIKeys = async() => { 
@@ -24,28 +26,39 @@ function ViewAPIKeys({basedOn}) {
     }, [id, basedOn])
 
     return (
-        <table className="api-keys-table">
-            <thead className="ak-head">
-                <tr className="ak-head-row">
-                    <th className="ak-col ak-col-key">API Key</th>
-                    <th className="ak-col ak-col-project">Project</th>
-                    <th className="ak-col ak-col-created">Created On</th>
-                </tr>
-            </thead>
-
-            <tbody className="ak-body">
-                {keys.map((item, idx) => (
-                    <tr key={idx} className="ak-row">
-                        <td className="ak-cell ak-cell-key">{item.api_key}</td>
-                        <td className="ak-cell ak-cell-project">{item.project_name}</td>
-                        <td className="ak-cell ak-cell-date">{
-                        new Date(item.created_at).toLocaleDateString()}
-                        </td>
+        <Box display={"flex"} flexDirection={"column"} alignItems={"center"} gap={2}>
+            <table className="api-keys-table">
+                <thead className="ak-head">
+                    <tr className="ak-head-row">
+                        <th className="ak-col ak-col-key">API Key</th>
+                        <th className="ak-col ak-col-project">Project</th>
+                        <th className="ak-col ak-col-status">Status</th>
+                        <th className="ak-col ak-col-created">Created On</th>
                     </tr>
-                ))}
+                </thead>
 
-            </tbody>
-        </table>
+                <tbody className="ak-body">
+                    {keys.map((item, idx) => (
+                        <tr key={idx} className="ak-row">
+                            <td className="ak-cell ak-cell-key">{item.api_key.substr(0, 5)}{"*".repeat(item.api_key.length - 5)}</td>
+                            <td className="ak-cell ak-cell-project">{item.project_name}</td>
+                            <td className="ak-cell ak-status">{item.status}</td>
+                            <td className="ak-cell ak-cell-date">{
+                            new Date(item.created_at).toLocaleDateString()}
+                            </td>
+                        </tr>
+                    ))}
+
+                </tbody>
+            </table>
+            {   
+                basedOn == "project_id" ?
+                    <Button variant="contained" onClick={()=>{navigate(`../projects/${id}/set-api-key`)}} sx={{ bgcolor: "#1e293b","&:hover": { bgcolor: "#0f172a" }}}>
+                        New API Key
+                    </Button>
+                    : <></>
+            }
+        </Box>
     );
 }
 

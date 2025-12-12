@@ -20,7 +20,8 @@ def get_api_keys_with_project_id(session: Session, project_id: UUID):
     query = (select(
                 APIKey.key.label("api_key"),
                 Project.name.label("project_name"),
-                APIKey.created_at.label("created_at")
+                APIKey.created_at.label("created_at"),
+                APIKey.status.label("status")
             ).join(Project, APIKey.project_id == Project.id)
             .where(APIKey.project_id == project_id))
     result = session.execute(query).all()
@@ -35,7 +36,8 @@ def get_api_keys_with_user_id(session: Session, user_id: UUID):
     query = (select(
                 APIKey.key.label("api_key"),
                 Project.name.label("project_name"),
-                APIKey.created_at.label("created_at")
+                APIKey.created_at.label("created_at"),
+                APIKey.status.label("status")
             ).join(Project, APIKey.project_id == Project.id)
             .where(Project.user_id == user_id))
     result = session.execute(query).all()

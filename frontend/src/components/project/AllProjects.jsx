@@ -10,6 +10,10 @@ function AllProjects() {
         const getProjects = async() => {
             try {
                 const res = await axios.get(`${API_BASE_URL}/projects/user/${user_id}`)
+                for (const project of res.data) {
+                    const projectMetrics = await axios.get(`${API_BASE_URL}/metrics/collective_24h_data/${project.id}`)
+                    project.metrics = projectMetrics.data
+                }
                 setProjects(res.data)
             } catch(err) {
                 console.log(err)
@@ -24,8 +28,10 @@ function AllProjects() {
                 (<ProjectCard key={item.id}
                     name={item.name}
                     id={item.id}
-                    description={item.description}/>)
-            ) )}
+                    description={item.description}
+                    n_requests_24h={item.metrics.request_count}
+                    error_rate={item.metrics.error_rate}/>)
+            ))}
         </div>
     )
 }

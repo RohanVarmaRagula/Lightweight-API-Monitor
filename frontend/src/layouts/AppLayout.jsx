@@ -23,6 +23,11 @@ function AppLayout() {
           </Typography>
 
           <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+
+            <Button variant="outline" onClick={() => navigate("/projects/new-project")} sx={{ bgcolor: "#1e293b", "&:hover": { bgcolor: "#0f172a" }}}>
+              Add Project
+            </Button>
+
             <Button variant="outline" onClick={() => navigate("/projects")} sx={{ bgcolor: "#1e293b", "&:hover": { bgcolor: "#0f172a" }}}>
               Projects
             </Button>

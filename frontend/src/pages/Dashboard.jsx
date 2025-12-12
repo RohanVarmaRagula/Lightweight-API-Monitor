@@ -28,9 +28,9 @@ function Dashboard() {
 
         try {
             const [collectiveRes, hourlyRes, allRes] = await Promise.all([
-            axios.get(`${API_BASE_URL}/metrics/collective_24h_data/${project_id}`),
-            axios.get(`${API_BASE_URL}/metrics/hourly_data/${project_id}`),
-            axios.get(`${API_BASE_URL}/metrics/data/${project_id}`),
+                axios.get(`${API_BASE_URL}/metrics/collective_24h_data/${project_id}`),
+                axios.get(`${API_BASE_URL}/metrics/hourly_data/${project_id}`),
+                axios.get(`${API_BASE_URL}/metrics/data/${project_id}`)
             ]);
 
             setCollective24hData(collectiveRes.data || null);

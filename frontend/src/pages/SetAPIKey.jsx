@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
 import { API_BASE_URL } from "../config";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { Box, Button, Typography } from "@mui/material";
 
 function SetAPIKey() {
     const {project_id} = useParams()
     const [clicked, setClicked] = useState(false);
     const [apiKey, setApiKey] = useState(null);
+    const navigate = useNavigate();
 
     const generateAPIKey = async () => {
         setClicked(true);
@@ -24,23 +26,33 @@ function SetAPIKey() {
     };
 
     return (
-        <>
-            <h3>Now your new project is ready. Click the button below to generate your API key.</h3>
-            <p>Note: This API key cannot be viewed again.</p>
+        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2, padding:10}}>
+            <Typography variant="h5">
+                Now your new project is ready. Click the button below to generate your API key.
+            </Typography>
+            
+            <Typography variant="subtitle1">
+                Note: This API key cannot be viewed again.
+            </Typography>
 
             {!clicked ? (
-                <button onClick={generateAPIKey}>
+                <Button onClick={generateAPIKey} variant="contained" size="large" sx={{ bgcolor: "#1e293b","&:hover": { bgcolor: "#0f172a" }}}>
                     Get API Key
-                </button>
+                </Button>
             ) : (
                 <>
-                <p style={{ fontFamily: "monospace", marginTop: "16px" }}>
-                    {apiKey}
-                </p>
-                <p>Now use this api-key in your project for service.</p>
+                    <Typography style={{ fontFamily: "monospace"}}>
+                        {apiKey}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                        Now use this api-key in your project for service.
+                    </Typography>
+                    <Button variant="contained" onClick={()=>{navigate(`../projects`)}} sx={{ bgcolor: "#1e293b","&:hover": { bgcolor: "#0f172a" }}}>
+                        View Projects
+                    </Button>
                 </>
             )}
-        </>
+        </Box>
     );
 }
 
