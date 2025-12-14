@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Header
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from database.session import get_session
@@ -10,18 +10,21 @@ from services.ingest import add_event, update_aggregated_metrics
 ingest_router = APIRouter()
 
 @ingest_router.post("/ingest", response_model=IngestResponse, status_code=status.HTTP_202_ACCEPTED)
-def ingest_data(ingest_req: IngestRequest, session: Session = Depends(get_session)):
-    api_key_status = check_api_key_status(session, ingest_req.api_key)
+def ingest_data(
+    ingest_req: IngestRequest,
+    x_api_key:str = Header(...),
+    session: Session = Depends(get_session)):
+    api_key_status = check_api_key_status(session, x_api_key)
     if api_key_status is None:
-        HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, 
-                     detail="API Key not found")
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, 
+                            detail="API Key not found")
     if api_key_status == APIKeyStatus.EXPIRED:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
                             detail="API Key expired")
     elif api_key_status == APIKeyStatus.DISABLED:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
                             detail="API Key disabled")
-    project_id = get_project_id_with_api_key(session, api_key=ingest_req.api_key)
+    project_id = get_project_id_with_api_key(session, api_key=x_api_key)
     
     try:
         add_event(
