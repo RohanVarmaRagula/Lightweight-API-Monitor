@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
-Name: lam-middleware
-Version: 0.1.0
+Name: lam_middleware
+Version: 0.1.1
 Summary: Lightweight API Monitoring middleware for Starlette/FastAPI
 Author: Rohan Varma
 Requires-Python: >=3.9

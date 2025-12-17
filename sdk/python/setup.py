@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="lam-middleware",
-    version="0.1.0",
+    name="lam_middleware",
+    version="0.1.1",
     packages=find_packages(),    
     author="Rohan Varma",
     description="Lightweight API Monitoring middleware for Starlette/FastAPI",
