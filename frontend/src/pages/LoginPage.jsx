@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { API_BASE_URL } from "../config";
 import axios from "axios";
 
 function LogIn() {
@@ -10,6 +9,7 @@ function LogIn() {
     const submitForm = async (e) => {
         e.preventDefault()
         try {
+            const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
             const res = await axios.post(`${API_BASE_URL}/login`, {
                 "email": email,
                 "password": password

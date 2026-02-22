@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useState } from "react";
-import { API_BASE_URL } from "../config";
 import { useNavigate, useParams } from "react-router-dom";
 import { Box, Button, Typography } from "@mui/material";
 
@@ -13,6 +12,7 @@ function SetAPIKey() {
     const generateAPIKey = async () => {
         setClicked(true);
         try {
+            const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
             console.log("project_id from URL:", project_id);
             const res = await axios.post(`${API_BASE_URL}/api_key`, {
                 "project_id": project_id 

@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { API_BASE_URL } from "../config";
 import axios from "axios";
 
 function SignUp() {
@@ -18,6 +17,7 @@ function SignUp() {
     }
 
     try {
+      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
       const res = await axios.post(`${API_BASE_URL}/register`, {
         email,
         password,

@@ -7,7 +7,6 @@ import LatencyChart from "../components/charts/LatencyChart"
 import LatencyAnalysisCard from "../components/charts/LatencyAnalysisCard"
 import { useEffect, useState } from "react"
 import axios from "axios"
-import { API_BASE_URL } from "../config"
 
 function Dashboard() {
     const { project_id } = useParams();
@@ -27,7 +26,8 @@ function Dashboard() {
         setError(null);
 
         try {
-            const [collectiveRes, hourlyRes, allRes] = await Promise.all([
+            const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+            const [collectiveRes, hourlyRes, allRes] = await Promise.all([    
                 axios.get(`${API_BASE_URL}/metrics/collective_24h_data/${project_id}`),
                 axios.get(`${API_BASE_URL}/metrics/hourly_data/${project_id}`),
                 axios.get(`${API_BASE_URL}/metrics/data/${project_id}`)

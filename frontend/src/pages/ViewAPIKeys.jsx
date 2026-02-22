@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { API_BASE_URL } from "../config";
 import { useEffect, useState } from "react";
 import { Box, Button } from "@mui/material";
 
@@ -12,6 +11,7 @@ function ViewAPIKeys({basedOn}) {
     useEffect(() => {
         const getAPIKeys = async() => { 
             try {
+                const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
                 const URL = (basedOn == "user_id") ?
                             `${API_BASE_URL}/api_key/user/${id}` :
                             `${API_BASE_URL}/api_key/project/${id}`;

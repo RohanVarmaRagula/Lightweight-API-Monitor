@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import ProjectCard from "./ProjectCard";
 import axios from "axios";
-import { API_BASE_URL } from "../../config";
 
 function AllProjects() {
     const user_id = localStorage.getItem("user_id")
@@ -9,6 +8,7 @@ function AllProjects() {
     useEffect(() => {
         const getProjects = async() => {
             try {
+                const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
                 const res = await axios.get(`${API_BASE_URL}/projects/user/${user_id}`)
                 for (const project of res.data) {
                     const projectMetrics = await axios.get(`${API_BASE_URL}/metrics/collective_24h_data/${project.id}`)

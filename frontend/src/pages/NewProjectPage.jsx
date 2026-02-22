@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { API_BASE_URL } from "../config";
 
 function NewProjectPage() {
     const [name, setName] = useState("");
@@ -12,6 +11,7 @@ function NewProjectPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
             const res = await axios.post(`${API_BASE_URL}/projects`, {
                 "name": name,
                 "description": description,
