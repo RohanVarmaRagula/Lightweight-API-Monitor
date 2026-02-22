@@ -1,13 +1,17 @@
 import jwt
+import os
 from datetime import datetime, timedelta
-from core.config import jwt_secret_key
+from dotenv import find_dotenv, load_dotenv
+
+dotenv_path = find_dotenv()
+load_dotenv(dotenv_path)
 
 def generate_jwt(payload: dict):
     to_encode = payload.copy()
     to_encode["exp"] = datetime.now() + timedelta(hours=1)
     token = jwt.encode(
             payload = to_encode,
-            key = jwt_secret_key,
+            key = os.getenv("JWT_SECRET_KEY"),
             algorithm = "HS256"
         )
     return token
@@ -16,7 +20,7 @@ def verify_jwt(token: str):
     try:
         payload = jwt.decode(
             token,
-            jwt_secret_key,
+            os.getenv("JWT_SECRET_KEY"),
             algorithms = ["HS256"]
         )
         return payload
