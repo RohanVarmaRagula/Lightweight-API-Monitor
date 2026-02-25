@@ -3,6 +3,7 @@ from typing import Optional
 import httpx
 import asyncio
 import time
+import warnings
 
 INGEST_API_URL = "http://127.0.0.1:8000/ingest"
 
@@ -17,6 +18,9 @@ async def ingest(api_key: str, payload: dict):
     except Exception:
         pass
     
+class LAMWarning(UserWarning):
+    pass
+    
 class LAMMiddleware(BaseHTTPMiddleware):
     def __init__(
         self,
@@ -29,8 +33,20 @@ class LAMMiddleware(BaseHTTPMiddleware):
         self.api_key = api_key
         self.excluded_raw_paths = exclude_raw_paths or set()
         self.excluded_path_templates = exclude_path_templates or set()
+        self.warn_api_key_not_set = False
 
     async def dispatch(self, request, call_next):
+        if not self.api_key or self.api_key == "":
+            if not self.warn_api_key_not_set:
+                warnings.warn(
+                    message="LAM_API_KEY not set. API requests are performed, but monitoring is paused.",
+                    LAMWarning,
+                    stacklevel=2
+                )
+                self.warn_api_key_not_set = True
+            response = await call_next(request)
+            return response
+        
         start_timer = time.perf_counter()
         error = False
         status_code = 500
