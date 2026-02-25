@@ -2,3 +2,4 @@ myvenv
 backend/core/config.py
 *.pyc
 .env
+.vscode

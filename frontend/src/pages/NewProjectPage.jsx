@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 function NewProjectPage() {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
+    const [acceptableErrorRate, setAcceptableErrorRate] = useState(1);
 
     const navigate = useNavigate();
 
@@ -15,6 +16,7 @@ function NewProjectPage() {
             const res = await axios.post(`${API_BASE_URL}/projects`, {
                 "name": name,
                 "description": description,
+                "acceptable_error_rate":acceptableErrorRate,
                 "user_id": localStorage.getItem("user_id")
             })
             navigate(`../projects/${res.data.id}/set-api-key`)
@@ -45,6 +47,15 @@ function NewProjectPage() {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     rows={3}
+                />
+            </div>
+            <div className="form-group">
+                <label htmlFor="projectAcceptableErrorRate">Acceptable Error Rate</label>
+                <input
+                    id="projectAcceptableErrorRate"
+                    type="number"
+                    value={acceptableErrorRate}
+                    onChange={(e) => setAcceptableErrorRate(e.target.value)}
                 />
             </div>
 

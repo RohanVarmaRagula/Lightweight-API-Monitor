@@ -1,7 +1,7 @@
 from __future__ import annotations
 from datetime import datetime
 import uuid
-from sqlalchemy import String, DateTime, Text, ForeignKey
+from sqlalchemy import String, DateTime, Text, ForeignKey, Float
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
@@ -34,6 +34,12 @@ class Project(Base):
         DateTime(timezone=True),
         nullable=False,
         server_default=func.now(),
+    )
+    
+    acceptable_error_rate: Mapped[float] = mapped_column(
+        Float,
+        default=1.00,
+        nullable=False
     )
 
     user: Mapped["User"] = relationship(#type:ignore

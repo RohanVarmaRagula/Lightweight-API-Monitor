@@ -28,6 +28,7 @@ function AllProjects() {
                 (<ProjectCard key={item.id}
                     name={item.name}
                     id={item.id}
+                    acceptable_error_rate={item.acceptable_error_rate}
                     description={item.description}
                     n_requests_24h={item.metrics.request_count}
                     error_rate={item.metrics.error_rate}/>)
