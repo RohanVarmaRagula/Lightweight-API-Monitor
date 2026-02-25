@@ -34,6 +34,11 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -44,6 +49,7 @@ body {
 
   background: var(--bg);
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 
@@ -104,6 +110,14 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 767px) {
+  .project-card-header {
+    flex-direction: column;
+  }
 }
 
 .project-title {
@@ -111,6 +125,20 @@ body {
   font-size: 20px;
   font-weight: 600;
   color: var(--text-primary); /* Dark text */
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 479px) {
+  .project-title {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+  .project-title {
+    font-size: 17px;
+  }
 }
 
 .project-description {
@@ -147,6 +175,20 @@ body {
   display: flex;
   justify-content: space-between;
   gap: 40px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 479px) {
+  .project-card-body {
+    gap: 20px;
+    justify-content: flex-start;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+  .project-card-body {
+    gap: 30px;
+  }
 }
 
 .project-stat {
@@ -173,6 +215,25 @@ body {
   display: flex;
   gap: 12px;
   margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 479px) {
+  .project-card-footer {
+    gap: 8px;
+  }
+  
+  .project-card-footer .btn-secondary,
+  .project-card-footer .btn-ghost {
+    flex: 1 1 48%;
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 767px) {
+  .project-card-footer {
+    gap: 10px;
+  }
 }
 
 /* primary button (now secondary in light theme) */
@@ -192,6 +253,12 @@ body {
     border-color 0.18s ease,
     transform 0.1s ease,
     box-shadow 0.18s ease;
+  
+  /* Touch target: min 44px for mobile */
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-secondary:hover {
@@ -220,6 +287,12 @@ body {
     border-color 0.15s ease,
     color 0.15s ease,
     transform 0.1s ease;
+  
+  /* Touch target */
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-ghost:hover {
@@ -256,6 +329,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 100%;
 }
 
 /* Labels */
@@ -300,6 +374,18 @@ body {
   box-shadow: 0 0 0 1px var(--accent-strong), var(--shadow-soft);
 }
 
+/* Mobile: Ensure inputs are touch-friendly */
+@media (max-width: 767px) {
+  .new-project-form input,
+  .new-project-form textarea {
+    font-size: 16px; /* Prevents auto-zoom on iOS */
+  }
+
+  .new-project-form textarea {
+    min-height: 120px;
+  }
+}
+
 /* Submit button (Primary Button) */
 .new-project-form .btn-primary {
   padding: 12px 24px;
@@ -332,7 +418,7 @@ body {
   transform: scale(0.97);
 }
 
-/* API keys */
+/* api-keys-table responsive */
 .api-keys-table {
   width: 100%;
   max-width: 1400px;
@@ -346,6 +432,53 @@ body {
 
   overflow: hidden; /* keep rounded corners */
   font-size: 14px;
+}
+
+/* Mobile: Make table horizontally scrollable */
+@media (max-width: 767px) {
+  .api-keys-table {
+    display: block;
+    margin: 16px auto 0;
+  }
+  
+  .api-keys-table thead {
+    display: none;
+  }
+  
+  .api-keys-table tbody {
+    display: block;
+  }
+  
+  .api-keys-table tr {
+    display: block;
+    margin-bottom: 12px;
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    background: var(--surface-2);
+    padding: 12px 0;
+  }
+  
+  .api-keys-table td {
+    display: block;
+    padding: 10px 16px;
+    text-align: left;
+    border: none;
+  }
+  
+  .api-keys-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: var(--text-secondary);
+    display: block;
+    margin-bottom: 4px;
+    letter-spacing: 0.08em;
+  }
+  
+  .ak-cell-date {
+    text-align: left !important;
+  }
 }
 
 /* Table head */
@@ -529,6 +662,13 @@ body {
   box-shadow: 0 0 0 1px var(--accent-strong), var(--shadow-soft);
 }
 
+/* Mobile: Touch-friendly inputs */
+@media (max-width: 767px) {
+  .auth-input {
+    font-size: 16px; /* Prevents auto-zoom on iOS */
+  }
+}
+
 /* Actions row */
 
 .auth-actions {
@@ -557,6 +697,12 @@ body {
     border-color 0.18s ease,
     transform 0.12s ease,
     box-shadow 0.18s ease;
+  
+  /* Touch target: min 44px for mobile */
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-primary:hover {
@@ -627,51 +773,267 @@ body {
   position: relative;
 }
 
-/* Responsive adjustments - mostly unchanged, but colors are inherited */
-@media (max-width: 768px) {
-  
-  .cards-grid {
-    padding: 20px;
+/* ===================================
+   RESPONSIVE DESIGN - Multiple Breakpoints
+   =================================== */
+
+/* Mobile Extra Small: < 480px */
+@media (max-width: 479px) {
+  :root {
+    --radius-lg: 14px;
+  }
+
+  body {
+    padding: 0;
   }
 
   .cards-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    margin: 20px auto 0;
+    padding: 16px;
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
-  
+
+  .cards-grid {
+    max-width: 100%;
+  }
+
+  .project-card {
+    padding: 16px 14px;
+    gap: 12px;
+  }
+
+  .project-card-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .project-title {
+    font-size: 16px;
+  }
+
+  .project-description {
+    font-size: 12px;
+  }
+
+  .project-health {
+    font-size: 12px;
+  }
+
+  .project-card-body {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .stat-value {
+    font-size: 18px;
+  }
+
+  .project-card-footer {
+    gap: 8px;
+  }
+
+  .btn-secondary,
+  .btn-ghost {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  /* New Project Form - Mobile */
   .new-project-form {
-    padding: 24px 26px;
-    border-radius: 20px;
+    margin: 20px auto 0;
+    max-width: 100%;
+    padding: 20px 16px;
+    gap: 16px;
+    border-radius: 16px;
   }
 
   .new-project-form input,
   .new-project-form textarea {
+    padding: 10px 12px;
     font-size: 14px;
+    border-radius: 10px;
+  }
+
+  .new-project-form .btn-primary {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+
+  .form-group label {
+    font-size: 13px;
+  }
+
+  /* API Keys Table - Mobile */
+  .api-keys-table {
+    max-width: 100%;
+    margin: 20px auto 0;
+    padding: 0;
+    border-radius: 16px;
+    font-size: 12px;
+  }
+
+  .ak-col,
+  .ak-cell {
+    padding: 8px 10px;
+  }
+
+  .ak-col-key {
+    width: 60%;
+  }
+
+  .ak-col-project {
+    width: 25%;
+  }
+
+  .ak-col-created {
+    width: 15%;
+  }
+
+  .ak-cell-key {
+    max-width: 150px;
+    font-size: 11px;
+  }
+
+  /* Auth Page - Mobile */
+  .auth-page {
+    padding: 24px 16px;
+  }
+
+  .auth-card {
+    max-width: 100%;
+    padding: 20px 16px 16px;
+    border-radius: 20px;
+  }
+
+  .auth-title {
+    font-size: 20px;
+    margin-bottom: 6px;
+  }
+
+  .auth-subtitle {
+    font-size: 12px;
+    margin-bottom: 16px;
+  }
+
+  .auth-form {
+    gap: 12px;
+  }
+
+  .auth-input {
+    padding: 9px 12px;
+    font-size: 13px;
+    border-radius: 10px;
+  }
+
+  .auth-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-primary {
+    padding: 9px 16px;
+    font-size: 13px;
+  }
+
+  .auth-submit,
+  .auth-switch {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Profile Menu - Mobile */
+  .profile-menu {
+    top: 60px;
+    right: 16px;
+    min-width: 200px;
+    border-radius: 16px;
+  }
+}
+
+/* Mobile Small: 480px - 767px */
+@media (min-width: 480px) and (max-width: 767px) {
+  :root {
+    --radius-lg: 16px;
+  }
+
+  .cards-grid {
+    margin: 24px auto 0;
+    padding: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .project-card {
+    padding: 18px 20px;
+    gap: 14px;
+  }
+
+  .project-title {
+    font-size: 17px;
+  }
+
+  .project-description {
+    font-size: 13px;
+  }
+
+  .project-card-body {
+    gap: 30px;
+  }
+
+  .stat-value {
+    font-size: 20px;
+  }
+
+  /* New Project Form */
+  .new-project-form {
+    margin: 24px auto 0;
+    max-width: 100%;
+    padding: 24px 20px;
+    gap: 20px;
+    border-radius: 18px;
+  }
+
+  .new-project-form input,
+  .new-project-form textarea {
     padding: 10px 14px;
+    font-size: 14px;
+    border-radius: 12px;
   }
 
   .new-project-form .btn-primary {
     padding: 10px 20px;
     font-size: 14px;
   }
+
+  /* API Keys Table */
   .api-keys-table {
+    max-width: 100%;
+    margin: 24px auto 0;
+    font-size: 13px;
+    border-radius: 18px;
     display: block;
     overflow-x: auto;
-    white-space: nowrap;
-    border-radius: 20px;
-    font-size: 13px;
   }
 
   .ak-col,
   .ak-cell {
-    padding: 10px 16px;
+    padding: 10px 14px;
   }
 
   .ak-cell-key {
-    max-width: 260px;
+    max-width: 200px;
+    font-size: 12px;
   }
+
+  /* Auth */
+  .auth-page {
+    padding: 32px 20px;
+  }
+
   .auth-card {
-    padding: 24px 22px 22px;
+    max-width: 100%;
+    padding: 24px 24px 20px;
     border-radius: 20px;
   }
 
@@ -683,14 +1045,281 @@ body {
     font-size: 13px;
   }
 
+  .auth-input {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+
+  .btn-primary {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
   .auth-actions {
     flex-direction: column;
-    align-items: stretch;
+    gap: 12px;
   }
 
   .auth-submit,
   .auth-switch {
     width: 100%;
     text-align: center;
+  }
+
+  /* Profile Menu */
+  .profile-menu {
+    top: 65px;
+    right: 20px;
+    min-width: 220px;
+    border-radius: 18px;
+  }
+}
+
+/* Tablet: 768px - 1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+  :root {
+    --radius-lg: 18px;
+  }
+
+  .cards-grid {
+    margin: 28px auto 0;
+    padding: 24px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .project-card {
+    padding: 20px 22px;
+  }
+
+  .project-title {
+    font-size: 18px;
+  }
+
+  /* New Project Form */
+  .new-project-form {
+    margin: 28px auto 0;
+    max-width: 100%;
+    padding: 28px 28px;
+    border-radius: 20px;
+  }
+
+  .new-project-form input,
+  .new-project-form textarea {
+    padding: 11px 15px;
+    font-size: 14px;
+  }
+
+  /* API Keys Table */
+  .api-keys-table {
+    max-width: 100%;
+    margin: 28px auto 0;
+    font-size: 13px;
+    border-radius: 20px;
+  }
+
+  .ak-cell-key {
+    max-width: 240px;
+  }
+
+  /* Auth */
+  .auth-page {
+    padding: 40px 24px;
+  }
+
+  .auth-card {
+    max-width: 100%;
+    padding: 28px 28px 24px;
+  }
+
+  .auth-title {
+    font-size: 24px;
+  }
+
+  /* Profile Menu */
+  .profile-menu {
+    top: 70px;
+    right: 24px;
+    min-width: 240px;
+  }
+}
+
+/* Desktop: 1024px - 1439px */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 26px;
+    padding: 28px;
+  }
+
+  .project-card {
+    padding: 21px 25px;
+  }
+
+  .api-keys-table {
+    margin: 30px auto 0;
+    font-size: 14px;
+  }
+}
+
+/* Large Desktop: 1440px+ */
+@media (min-width: 1440px) {
+  .cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    padding: 32px;
+  }
+
+  .api-keys-table {
+    margin: 32px auto 0;
+    font-size: 14px;
+  }
+
+  .profile-menu {
+    top: 70px;
+    right: 32px;
+  }
+}
+
+/* =========================
+   Dashboard & Chart Responsive
+   ========================= */
+
+/* MUI Chart containers */
+.MuiLineChart-root,
+.MuiPieChart-root,
+.MuiBarChart-root {
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100%;
+}
+
+.MuiResponsiveChartContainer {
+  width: 100% !important;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+/* Ensure CardContent doesn't overflow */
+.MuiCardContent {
+  padding: 16px !important;
+  overflow: auto;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+.MuiCard {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  margin: 0;
+}
+
+.MuiCardHeader {
+  padding: 16px !important;
+  width: 100%;
+}
+
+.MuiCardHeader-title {
+  white-space: normal;
+  word-break: break-word;
+}
+
+.MuiCardHeader-subheader {
+  white-space: normal;
+  word-break: break-word;
+}
+
+/* SVG charts responsive */
+svg[class*="MuiChart"] {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure chart containers are responsive */
+.MuiLineChart-root svg,
+.MuiBarChart-root svg,
+.MuiPieChart-root svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Mobile: Dashboard charts adjustments */
+@media (max-width: 479px) {
+  .MuiCardContent {
+    padding: 10px 12px !important;
+    max-height: 400px;
+  }
+
+  .MuiCardHeader {
+    padding: 12px 12px !important;
+  }
+
+  .MuiCardHeader-title {
+    font-size: 14px !important;
+  }
+
+  .MuiCardHeader-subheader {
+    font-size: 12px !important;
+  }
+
+  .MuiCard {
+    margin: 0;
+  }
+
+  .MuiCardContent svg {
+    max-width: 100%;
+    overflow: visible;
+  }
+}
+
+/* Mobile Small: 480px - 767px */
+@media (min-width: 480px) and (max-width: 767px) {
+  .MuiCardContent {
+    padding: 12px 14px !important;
+    max-height: 450px;
+  }
+
+  .MuiCardHeader {
+    padding: 14px 14px !important;
+  }
+
+  .MuiCardHeader-title {
+    font-size: 15px !important;
+  }
+
+  .MuiCardHeader-subheader {
+    font-size: 13px !important;
+  }
+
+  .MuiCardContent svg {
+    max-width: 100%;
+    overflow: visible;
+  }
+}
+
+/* Extra Large: 1920px+ */
+@media (min-width: 1920px) {
+  :root {
+    --radius-lg: 20px;
+    font-size: 16px;
+  }
+
+  .cards-grid {
+    gap: 32px;
+    padding: 40px;
+  }
+
+  .project-card {
+    padding: 24px 28px;
+  }
+
+  .new-project-form {
+    padding: 40px 44px;
+  }
+
+  .auth-card {
+    max-width: 460px;
+    padding: 36px 40px 32px;
   }
 }

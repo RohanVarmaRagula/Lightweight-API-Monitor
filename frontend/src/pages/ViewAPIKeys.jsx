@@ -26,7 +26,7 @@ function ViewAPIKeys({basedOn}) {
     }, [id, basedOn])
 
     return (
-        <Box display={"flex"} flexDirection={"column"} alignItems={"center"} gap={2}>
+        <Box display="flex" flexDirection="column" alignItems="center" gap={{ xs: 1, sm: 2, md: 2 }} sx={{ padding: { xs: '12px', sm: '16px', md: '24px' }, width: '100%', overflow: 'auto' }}>
             <table className="api-keys-table">
                 <thead className="ak-head">
                     <tr className="ak-head-row">
@@ -40,10 +40,10 @@ function ViewAPIKeys({basedOn}) {
                 <tbody className="ak-body">
                     {keys.map((item, idx) => (
                         <tr key={idx} className="ak-row">
-                            <td className="ak-cell ak-cell-key">{item.api_key.substr(0, 5)}{"*".repeat(item.api_key.length - 5)}</td>
-                            <td className="ak-cell ak-cell-project">{item.project_name}</td>
-                            <td className="ak-cell ak-status">{item.status}</td>
-                            <td className="ak-cell ak-cell-date">{
+                            <td className="ak-cell ak-cell-key" data-label="API Key">{item.api_key.substr(0, 5)}{"*".repeat(item.api_key.length - 5)}</td>
+                            <td className="ak-cell ak-cell-project" data-label="Project">{item.project_name}</td>
+                            <td className="ak-cell ak-status" data-label="Status">{item.status}</td>
+                            <td className="ak-cell ak-cell-date" data-label="Created On">{
                             new Date(item.created_at).toLocaleDateString()}
                             </td>
                         </tr>
@@ -53,7 +53,7 @@ function ViewAPIKeys({basedOn}) {
             </table>
             {   
                 basedOn == "project_id" ?
-                    <Button variant="contained" onClick={()=>{navigate(`../projects/${id}/set-api-key`)}} sx={{ bgcolor: "#1e293b","&:hover": { bgcolor: "#0f172a" }}}>
+                    <Button variant="contained" onClick={()=>{navigate(`../projects/${id}/set-api-key`)}} sx={{ bgcolor: "#1e293b","&:hover": { bgcolor: "#0f172a" }, width: { xs: '100%', sm: 'auto' }, maxWidth: '300px' }}>
                         New API Key
                     </Button>
                     : <></>

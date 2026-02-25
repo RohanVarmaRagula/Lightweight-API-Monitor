@@ -23,9 +23,10 @@ function Profile({ onClose }) {
     <ClickAwayListener onClickAway={onClose}>
       <Paper elevation={8} role="menu" sx={{
             position: "absolute",    
-            top: 70,
-            right: 32,
-            minWidth: 240,
+            top: { xs: 60, sm: 65, md: 70 },
+            right: { xs: 8, sm: 16, md: 32 },
+            minWidth: { xs: 200, sm: 220, md: 240 },
+            maxWidth: { xs: 'calc(100vw - 16px)', sm: '240px', md: '240px' },
             borderRadius: 2.75,      
             border: "1px solid",
             borderColor: "grey.300",

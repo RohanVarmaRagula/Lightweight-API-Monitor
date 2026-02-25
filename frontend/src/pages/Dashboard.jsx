@@ -95,13 +95,20 @@ function Dashboard() {
     return (
         <Box sx={{
             display: 'flex',
-            gap: 1,
-            alignItems: "baseline"
+            flexDirection: { xs: 'column', sm: 'column', md: 'row' },
+            gap: { xs: 1, sm: 1, md: 2 },
+            alignItems: "flex-start",
+            padding: { xs: '12px', sm: '16px', md: '20px' },
+            overflow: 'hidden',
+            width: '100%'
         }}>
             <Box sx={{
                 display: 'grid',
-                gap:1, 
-                alignItems: "flex-start"
+                gap: { xs: 1, sm: 1, md: 1 },
+                alignItems: "flex-start",
+                width: { xs: '100%', sm: '100%', md: 'auto' },
+                minWidth: { xs: '100%', sm: '100%', md: '300px' },
+                flex: { xs: 'none', sm: 'none', md: 0 }
             }}>
                 <ErrorRateCard errorRateValue={collective24hData.error_rate}/>
                 <SuccessFailurePie success={collective24hData.successful_request_count}
@@ -112,8 +119,11 @@ function Dashboard() {
             </Box>
             <Box sx={{
                 display: 'grid',
-                gap:1,
-                flex: 2
+                gap: { xs: 1, sm: 1, md: 1 },
+                flex: { xs: '1 1 100%', sm: '1 1 100%', md: 2 },
+                width: { xs: '100%', sm: '100%', md: 'auto' },
+                minWidth: 0,
+                overflow: 'hidden'
             }}>            
                 <RequestsPerHour requestsPerHour={requestsPerHour}/>
                 <LatencyChart latencies={latencies}/>

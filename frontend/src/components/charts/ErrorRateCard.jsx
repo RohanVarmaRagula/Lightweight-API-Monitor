@@ -1,6 +1,9 @@
-import {Card, CardContent, CardHeader, Chip, Typography} from '@mui/material'
+import {Card, CardContent, CardHeader, Chip, Typography, useMediaQuery} from '@mui/material'
 
 function ErrorRateCard({errorRateValue}) {
+    const isMobile = useMediaQuery('(max-width:767px)');
+    const variant = isMobile ? 'h4' : 'h3';
+
     const healthComment = 
         errorRateValue < 10 ? 'Healthy' :
         errorRateValue < 50 ? 'Warning' :
@@ -21,7 +24,7 @@ function ErrorRateCard({errorRateValue}) {
                 />
             
             <CardContent sx={{display: 'flex', alignItems:'baseline', gap:1}}>
-                <Typography variant='h3'>{errorRateValue}%</Typography>
+                <Typography variant={variant}>{errorRateValue}%</Typography>
                 <Typography variant='body2'>last 24H</Typography>
             </CardContent>
         </Card>
