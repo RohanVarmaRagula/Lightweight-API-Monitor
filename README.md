@@ -81,14 +81,15 @@ Now, you need to add this middleware to your FastAPI app. For example,
 ```
 from fastapi import FastAPI
 from lam_middleware import LAMMiddleware
+from dotenv import load_dotenv
 import os
 
-app = FastAPI()
+load_dotenv()
 
-# add our middleware
+app = FastAPI()
 app.add_middleware(
     LAMMiddleware,
-    api_key=os.getenv("LAM_API_KEY") # make sure .env has this env var 
+    api_key=os.getenv("LAM_API_KEY")
 )
 
 @app.get("/users")
