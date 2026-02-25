@@ -40,7 +40,7 @@ class LAMMiddleware(BaseHTTPMiddleware):
             if not self.warn_api_key_not_set:
                 warnings.warn(
                     message="LAM_API_KEY not set. API requests are performed, but monitoring is paused.",
-                    LAMWarning,
+                    category=LAMWarning, 
                     stacklevel=2
                 )
                 self.warn_api_key_not_set = True
