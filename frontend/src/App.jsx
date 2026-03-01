@@ -8,6 +8,7 @@ import LogIn from "./pages/LoginPage";
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
+import GettingStarted from "./pages/GettingStarted";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/projects/:id/project-api-keys" element={<ViewAPIKeys basedOn={"project_id"}/>}/>
           <Route path="/projects/:project_id/dashboard" element={<Dashboard/>}/>
           <Route path="/:id/user-api-keys" element={<ViewAPIKeys basedOn={"user_id"}/>}/>
+          <Route path="/getting-started" element={<GettingStarted/>}/>
         </Route>
 
       </Routes>

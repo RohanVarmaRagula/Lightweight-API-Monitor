@@ -131,12 +131,12 @@ Still under development, will be deployed soon ...
 
 # Notes to developer and future improvements
 1. When deploying, re-publish the middleware because it has `INGEST_API_URL = "http://127.0.0.1:8000/ingest"` in it.
-2. Add docs in the frontend
+2. ~~Add docs in the frontend~~
 3. Add mail alerting
 4. Add subscription scheme
 5. Add advanced graphs (filter by endpoints, date-range, etc.)
 6. Track API usage based on location 
-7. ~~` Make UI responsive `~~ 
-8. Add option to revoke api key
+7. ~~Make UI responsive~~ 
+8. ~~Add option to revoke api key~~
 9. Add Querying feature for the dashboard
 10. 
