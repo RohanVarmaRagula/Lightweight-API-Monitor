@@ -136,7 +136,7 @@ Still under development, will be deployed soon ...
 4. Add subscription scheme
 5. Add advanced graphs (filter by endpoints, date-range, etc.)
 6. Track API usage based on location 
-7. ~~Make UI responsive~~ 
-8. ~~Add option to revoke api key~~
+7. ~~` Make UI responsive `~~ 
+8. ~~`Add option to revoke api key`~~
 9. Add Querying feature for the dashboard
 10. 
