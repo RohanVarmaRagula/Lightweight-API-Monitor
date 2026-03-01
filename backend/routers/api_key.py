@@ -27,16 +27,15 @@ def add_api_key(api_request: APIKeyRequest, session: Session = Depends(get_sessi
 def get_api_keys_from_project_id(project_id: UUID, session: Session = Depends(get_session)):
     api_keys = get_api_keys_with_project_id(
         session=session, project_id=project_id)
-    print(api_keys)
     api_keys = [
         APIKeyResponseFromID(
+            id=row.id,
             api_key=row.api_key,
             project_name=row.project_name,
             created_at=row.created_at,
             status=row.status
         ) for row in api_keys
     ]
-    print(api_keys)
     return api_keys
 
 @api_key_router.get("/api_key/user/{user_id}", response_model=list[APIKeyResponseFromID], status_code=status.HTTP_200_OK)
@@ -44,6 +43,7 @@ def get_api_keys_from_user_id(user_id: UUID, session: Session = Depends(get_sess
     results = get_api_keys_with_user_id(session, user_id)
     results = [
         APIKeyResponseFromID(
+            id=row.id,
             api_key=row.api_key,
             project_name=row.project_name,
             created_at=row.created_at,
@@ -70,7 +70,7 @@ def disable_api_key(id: UUID, session: Session=Depends(get_session)):
             status_code=status.HTTP_404_NOT_FOUND,
             detail="API key not found",
         )
-    return {"detail": "API key diables"}
+    return {"detail": "API key disabled"}
         
 @api_key_router.patch("/api_keys/{id}/expire", status_code=status.HTTP_200_OK)
 def expire_api_key(id: UUID, session: Session=Depends(get_session)):

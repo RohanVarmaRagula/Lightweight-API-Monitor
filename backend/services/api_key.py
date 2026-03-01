@@ -18,6 +18,7 @@ def create_api_key(session: Session, project_id: UUID):
 
 def get_api_keys_with_project_id(session: Session, project_id: UUID):
     query = (select(
+                APIKey.id.label("id"),
                 APIKey.key.label("api_key"),
                 Project.name.label("project_name"),
                 APIKey.created_at.label("created_at"),
@@ -34,6 +35,7 @@ def get_project_id_with_api_key(session: Session, api_key: UUID):
  
 def get_api_keys_with_user_id(session: Session, user_id: UUID):
     query = (select(
+                APIKey.id.label("id"),
                 APIKey.key.label("api_key"),
                 Project.name.label("project_name"),
                 APIKey.created_at.label("created_at"),

@@ -138,4 +138,5 @@ Still under development, will be deployed soon ...
 6. Track API usage based on location 
 7. ~~` Make UI responsive `~~ 
 8. Add option to revoke api key
-9. 
+9. Add Querying feature for the dashboard
+10. 

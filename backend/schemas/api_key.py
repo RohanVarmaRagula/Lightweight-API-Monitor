@@ -22,6 +22,7 @@ class APIKeyResponse(BaseModel):
         from_attributes = True
         
 class APIKeyResponseFromID(BaseModel):
+    id: UUID
     api_key: str
     project_name: str
     created_at: datetime
