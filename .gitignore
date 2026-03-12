@@ -3,3 +3,4 @@ backend/core/config.py
 *.pyc
 .env
 .vscode
+lightweightapimonitor-rsakeys.pem

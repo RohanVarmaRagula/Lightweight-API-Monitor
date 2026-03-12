@@ -5,7 +5,7 @@ import asyncio
 import time
 import warnings
 
-INGEST_API_URL = "http://127.0.0.1:8000/ingest"
+INGEST_API_URL = "https://lightweight-api-monitor.onrender.com/ingest"
 
 async def ingest(api_key: str, payload: dict):
     try:
