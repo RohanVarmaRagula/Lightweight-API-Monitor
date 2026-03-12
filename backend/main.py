@@ -12,7 +12,7 @@ app = FastAPI()
 origins = [
     "http://localhost:5173",
     "http://127.0.0.1:8000",
-    "https://lightweight-api-monitor-one.vercel.app/"
+    "https://lightweight-api-monitor-one.vercel.app",
 ]
 
 app.add_middleware(
